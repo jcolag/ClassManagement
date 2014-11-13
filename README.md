@@ -6,3 +6,19 @@ After teaching for years, I got tired of updating my lecture notes when changing
 That has changed, so this is my attempt to future-proof the notes.  Various shell scripts grab the text out of the notes, convert them to Markdown for permanent storage, and process them into PDF packages with everything needed for the night.
 
 Right now, it's a hodge-podge of small scripts tuned specifically for my existing setup, but hopefully will be generalized and modernized quickly.
+
+markdown.sh
+-----------
+
+This script gets the ball rolling.  It takes a Microsoft Word document as an input, converts it to plain text, and indents the ordered lists to show up properly.
+
+This assumes that lecture points are organized along the lines of what I've done for many years...
+
+    1.  Main Point.
+        a)  Subsidiary topic.
+            i.  Minor issues.
+
+The script also assumes that you have [antiword](http://www.winfield.demon.nl/) installed.
+
+Due to _antiword_ not being built for the purpose, the resulting output file is only Markdown in terms of the ordered lists.  Any use of bold, italics, or different typefaces must be handled manually.
+
