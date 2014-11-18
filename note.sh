@@ -1,14 +1,35 @@
 #!/bin/sh
-base=$(echo "$1" | cut -f1 -d'.')
-class=$(grep "Lecture [0-9]" "$1" | sed 's/##[^0-9a-zA-Z].*//g' | tr '[:upper:]' '[:lower:]' | tr -d '#' | cut -f1 -d':')
+
+##########
+###
+### Set up initial values
+###
+##########
+
+# Input file name
+infile="$1"
+
+# Base name (with path) of the input file
+base=$(echo "$infile" | cut -f1 -d'.')
+
+# Lecture line, normalized
+class=$(grep "Lecture [0-9]" "$infile" | sed 's/##[^0-9a-zA-Z].*//g' | tr '[:upper:]' '[:lower:]' | tr -d '#' | cut -f1 -d':')
+
+# Document-specific variables, set later if necessary
 docvars=
-exam=$(grep "Examination#" "$1")
+
+# Exam line
+exam=$(grep "Examination#" "$infile")
+
+# Which style, set later
 style=
+
+# Style type: t = typical, s = syllabus, f = exam
 stylevar=t
 if [ ".$class." = ".." ]
 then
   stylevar=f
-  syllabus=$(head -1 "$1" | grep Syllabus)
+  syllabus=$(head -1 "$infile" | grep Syllabus)
   if [ ".$syllabus$exam." = ".." ]
   then
     stylevar=f
@@ -16,48 +37,74 @@ then
     stylevar=s
   fi
 fi
+
+# Output file type, for GPP macros
 gpptype=-D$(echo "$2" | tr '[:lower:]' '[:upper:]')
-size=$(wc -l < "$1")
+
+# Number of lines in the input file
+size=$(wc -l < "$infile")
+
+# Output file prefix, c_ by default
 if [ ".$3." != ".." ]
 then
   class=$(echo "$3" | tr '[:upper:]' '[:lower:]')
 else
   class=c
 fi
+
+# Page margin
 margin=1
 if [ "$size" -le "9" ]
 then
-  margin=$(grep "^\!" "$1" | cut -f2 -d'@')
+  margin=$(grep "^\!" "$infile" | cut -f2 -d'@')
   if [ ".$margin." = ".." ]
   then
     margin=1
   fi
 fi
-temptype=$2
-if [ ".$temptype." = ".pdf." ]
+
+# Output file type
+outtype=$2
+if [ ".$outtype." = ".pdf." ]
 then
-  temptype=latex
+  outtype=latex
 fi
+
+# Pandoc template to use for conversion
 template=
-if [ -f ../pandoc-templates/default.$temptype ]
+if [ -f ../pandoc-templates/default.$outtype ]
 then
   template=--template=../pandoc-templates/default
 fi
 
-# Just pass through any PDFs and bail
-ext=$(echo "$1" | rev | cut -f1 -d'.' | rev)
+##########
+###
+### Just pass through any PDFs and bail
+###
+##########
+ext=$(echo "$infile" | rev | cut -f1 -d'.' | rev)
 if [ ".$ext." = ".pdf." ]
 then
-  cp "$1" ${class}_"$1"
+  cp "$infile" ${class}_"$infile"
   echo PDF DONE!
   exit
 fi
 
-for vartext in $(grep "^<!--" "$1" | cut -c5- | rev | cut -c4- | rev)
+##########
+###
+### Extract document-specific variables from input document
+###
+##########
+for vartext in $(grep "^<!--" "$infile" | cut -c5- | rev | cut -c4- | rev)
 do
   docvars="--variable=$vartext $docvars"
 done
 
+##########
+###
+### Set pandoc style parameter
+###
+##########
 if [ ".$stylevar." = ".t." ]
 then
   style=--variable=style:lecture
@@ -65,25 +112,50 @@ elif [ ".$stylevar." = ".s." ]
 then
   style=--variable=style:outline
 fi
+
+##########
+###
+### Override font for exams
+###
+##########
 if [ ".$exam." = ".." ]
 then
   font=
 else
   font=--variable=fontsize:12pt
 fi
-gpp -H "$gpptype" "$1" | pandoc $style $font $template --data-dir=../refs -s -S --ascii --variable=marg:$margin $docvars -o "${class}_${base}.$2"
 
-if [ "$(grep -c "#note" "$1")" = "0" ]
+##########
+###
+### Preprocess and convert the file directly
+###
+### Note that $docvars contains multiple words, so should not be quoted.
+###
+##########
+gpp -H "$gpptype" "$infile" | pandoc $style $font $template --data-dir=../refs -s -S --ascii --variable=marg:$margin $docvars -o "${class}_${base}.$2"
+
+##########
+###
+### Quit if there's no detail to remove from the outline form
+###
+##########
+if [ "$(grep -c "#note" "$infile")" = "0" ]
 then
   echo DONE!
   exit
 fi
 
-# Remove delimited note text for lecture outline
+##########
+###
+### Remove delimited note text for lecture outline
+###
+### Note that $docvars contains multiple words, so should not be quoted.
+###
+##########
 if [ "$stylevar" = "t" ]
 then
   style=--variable=style:outline
 fi
-gpp -H "$gpptype" -DOUTLINE "$1" | pandoc --variable=fontsize:12pt $style $template --data-dir=../refs -s -S --ascii $docvars -o "${class}_${base}_outline.$2"
+gpp -H "$gpptype" -DOUTLINE "$infile" | pandoc --variable=fontsize:12pt $style $template --data-dir=../refs -s -S --ascii $docvars -o "${class}_${base}_outline.$2"
 
 echo DONE with outline!
