@@ -22,3 +22,23 @@ The script also assumes that you have [antiword](http://www.winfield.demon.nl/) 
 
 Due to _antiword_ not being built for the purpose, the resulting output file is only Markdown in terms of the ordered lists.  Any use of bold, italics, or different typefaces must be handled manually.
 
+note.sh
+-------
+
+The _note_ script takes a set of lecture notes or supplemental material in Markdown format (with GPP preprocessor directives) as input and outputs a converted file in the specified format.  If the input material doubles as notes and a handout, the script generates both.
+
+Invoke it with:
+
+    note.sh input_file.md output_type class_name
+
+For example, a typical run might look like:
+
+    $ sh ../note.sh 06a_parameters.markdown pdf cs0000
+    DONE with outline!
+    
+    $ l cs*
+    cs0000_06a_parameters_outline.pdf  cs0000_06a_parameters.pdf
+
+The script assumes that you have [GPP](http://en.nothingisreal.com/wiki/GPP) the Generic Preprocessor and [Pandoc](http://johnmacfarlane.net/pandoc/) installed.  Pandoc's template files are also assumed to be in a sister folder to the Markdown documents.
+
+
