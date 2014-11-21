@@ -1,18 +1,19 @@
 #!/bin/sh
+lecture=$1
 class=$2
 attend=
-if [ ".$1." = ".01." ]
+if [ ".$lecture." = ".01." ]
 then
   attend=../common/attendance.pdf
 fi
-for i in $1*
+for i in $lecture*
 do
   sh ../note.sh "$i" pdf "$class"
 done
 listing=$(mktemp).lecture.txt
 save=
 touch "$listing"
-for i in ${class}_${1}*.pdf
+for i in ${class}_${lecture}*.pdf
 do
   base=$(echo "$i" | cut -f1 -d'.')
   ext=$(echo "$i" | cut -f2- -d'.')
@@ -24,10 +25,9 @@ do
   fi
 done
 pdfs=$(tr '\n' ' ' < "$listing")
-pdfs=$save $attend "$pdfs"
+pdflist=$save $attend "$pdfs"
 classuc=$(echo "$class" | tr '[:lower:]' '[:upper:]')
-#echo PDFS=$pdfs
-pdftk $pdfs output "${classuc}_L${1}".pdf
+pdftk $pdflist output "${classuc}_L${lecture}".pdf
 rm -f "$listing"
-rm "${class}_${1}"*.pdf
+rm "${class}_${lecture}"*.pdf
 
