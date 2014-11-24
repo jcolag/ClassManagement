@@ -63,7 +63,7 @@ done
 pdfs=$(tr '\n' ' ' < "$listing")
 
 # Combine outline, attendance, and other files in that order
-pdflist=$save $attend "$pdfs"
+pdflist="$save $attend $pdfs"
 
 # Combine the listed PDF files
 pdftk $pdflist output "${classuc}_L${lecture}".pdf
