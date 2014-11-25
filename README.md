@@ -41,4 +41,24 @@ For example, a typical run might look like:
 
 The script assumes that you have [GPP](http://en.nothingisreal.com/wiki/GPP) the Generic Preprocessor and [Pandoc](http://johnmacfarlane.net/pandoc/) installed.  Pandoc's template files are also assumed to be in a sister folder to the Markdown documents.
 
+getpdf.sh
+---------
+
+The _getpdf_ script leverages _`node.sh`_ to generate and package everything needed for a lecture into one PDF package.  Looking for the (zero-padded, two-digit) lecture number, it creates each component, plus a blank attendance sheet for the first night.
+
+A typical session might look like:
+
+    $ sh ../getpdf.sh 04 cs0000
+    DONE with outline!
+    DONE!
+    PDF DONE!
+    PDF DONE!
+    
+    $ ls CS*
+    CS0000_L04.pdf
+
+The script assumes that you have [PDFtk](https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/) installed.
+
+Please note that, in calling `pdftk`, the script intentionally avoids quoting `$pdflist` against the judgment of any semantic checker (such as `shellcheck`).  In this case, word splitting is a requirement, because the variable holds multiple file names.  As a result, this presumably means that the PDF files to assemble may not have spaces in them.  My source files have no spaces, so this is no danger.
+
 
