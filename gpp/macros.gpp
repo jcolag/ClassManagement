@@ -1,0 +1,36 @@
+<#define file|`#1`>
+<#define literal|`#1`>
+<#define code|`#1`>
+<#define epigramnq|\> \> *"#1*>
+<#define epigram|\> \> *"#1"*>
+<#define qa|\> *#1*>
+<#define attribution|\> \> \> \> \> \> --- #1>
+<#define book|**#1**>
+<#define note|#1>
+<#ifdef OUTLINE>
+  <#define note|>
+<#endif>
+<#define space|&nbsp;---&nbsp;>
+<#define tex|TeX>
+<#define newline|>
+<#define lines|
+  <#if #1>
+<#newline>
+    <#define loop|<#lines #1>>
+  <#else>
+    <#define loop|>
+  <#endif>
+  <#loop <#eval #1-1>>
+>
+<#define JNC|>
+
+<#ifdef HTML>
+  <#include "html.gpp">
+<#endif>
+<#ifdef LATEX>
+  <#include "latex.gpp">
+<#endif>
+<#ifdef PDF>
+  <#include "latex.gpp">
+<#endif>
+

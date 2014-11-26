@@ -1,0 +1,95 @@
+<#define space| \\hfill >
+<#define tex|T\\kern-.1667em\\lower.5ex\\hbox{E}\\kern-.125emX>
+<#define times|$\\times$>
+<#define plusminus|$\\pm$>
+<#define divide|$\\div$>
+<#define element|$\\in$>
+<#define notelement|$\\notin$>
+<#define abs|$|$>
+<#define sqrt|$\\sqrt{}$>
+<#define subset|$\\subset$>
+<#define supset|$\\supset$>
+<#define isect|$\\cap$>
+<#define union|$\\cup$>
+<#define setdif|$\\setminus$>
+<#define negate|$\\lnot$>
+<#define cross|$\\times$>
+<#define power|$\\mathcal{P}$>
+<#define empty|$\\emptyset$>
+
+<#define alpha|$\\alpha$>
+<#define beta|$\\beta$>
+<#define gamma|$\\gamma$>
+<#define delta|$\\delta$>
+<#define epsilon|$\\epsilon$>
+<#define zeta|$\\zeta$>
+<#define eta|$\\eta$>
+<#define theta|$\\theta$>
+<#define iota|$\\iota$>
+<#define kappa|$\\kappa$>
+<#define lambda|$\\lambda$>
+<#define mu|$\\mu$>
+<#define nu|$\\nu$>
+<#define xi|$\\xi$>
+<#define omicron|$\\omicron$>
+<#define pi|$\\pi$>
+<#define rho|$\\rho$>
+<#define sigma|$\\sigma$>
+<#define tau|$\\tau$>
+<#define upsilon|$\\upsilon$>
+<#define phi|$\\phi$>
+<#define chi|$\\chi$>
+<#define psi|$\\psi$>
+<#define omega|$\\omega$>
+
+<#define Alpha|$\\Alpha$>
+<#define Beta|$\\Beta$>
+<#define Gamma|$\\Gamma$>
+<#define Delta|$\\Delta$>
+<#define Epsilon|$\\Epsilon$>
+<#define Zeta|$\\Zeta$>
+<#define Eta|$\\Eta$>
+<#define Theta|$\\Theta$>
+<#define Iota|$\\Iota$>
+<#define Kappa|$\\Kappa$>
+<#define Lambda|$\\Lambda$>
+<#define Mu|$\\Mu$>
+<#define Nu|$\\Nu$>
+<#define Xi|$\\Xi$>
+<#define Omicron|$\\Omicron$>
+<#define Pi|$\\Pi$>
+<#define Rho|$\\Rho$>
+<#define Sigma|$\\Sigma$>
+<#define Tau|$\\Tau$>
+<#define Upsilon|$\\Upsilon$>
+<#define Phi|$\\Phi$>
+<#define Chi|$\\Chi$>
+<#define Psi|$\\Psi$>
+<#define Omega|$\\Omega$>
+
+<#define auml|\\"{a}>
+<#define euml|\\"{e}>
+<#define iuml|\\"{i}>
+<#define ouml|\\"{o}>
+<#define uuml|\\"{u}>
+
+<#define usejoins|\\def\\ojoin{\\setbox0=\\hbox{$\\bowtie$}%
+\\rule[-.02ex]{.25em}{.4pt}\\llap{\\rule[\\ht0]{.25em}{.4pt}}}
+\\def\\dbjoinl{\\mathbin{\\ojoin\\mkern-5.8mu\\bowtie}}
+\\def\\dbjoinr{\\mathbin{\\bowtie\\mkern-5.8mu\\ojoin}}
+\\def\\dbjoinf{\\mathbin{\\ojoin\\mkern-5.8mu\\bowtie\\mkern-5.8mu\\ojoin}}>
+<#define joinl|$\\dbjoinl$>
+<#define joinr|$\\dbjoinr$>
+<#define joinf|$\\dbjoinf$>
+
+<#define epigram|\> \> *\\small"#1"*>
+<#define attribution|\> \> \> \> \> \> \\small--- #1>
+<#ifdef OUTLINE>
+  <#define page|\\newpage>
+  <#define newline|>
+<#else>
+  <#define page|>
+  <#define newline|\\vspace{1em}>
+  <#define carrret|\\vspace{0em}>
+<#endif>
+

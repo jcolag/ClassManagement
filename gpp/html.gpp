@@ -1,0 +1,29 @@
+<#define tex|T<sub>E</sub>X>
+<#define page|<hr>>
+<#define newline|<br>>
+<#define space| &nbsp; >
+<#define plusminus|&plusmn;>
+<#define divide|&divide;>
+<#define element|&isin:>
+<#define notelement|&notin;>
+<#define abs||>
+<#define subset|&sub;>
+<#define supset|&sup;>
+<#define isect|&cap;>
+<#define union|&cup;>
+<#define setdif|&#8726;>
+<#define negate|&not;>
+<#define cross|&times;>
+<#define power|&weierp;>
+<#define empty|&empty;>
+
+<#define sigma|&sigma;>
+<#define pi|&pi;>
+<#define rho|&rho;>
+
+<#define dbjoinl|=&#8904;>
+<#define dbjoinr|&#8904;=>
+<#define dbjoinf|=&#8904;=>
+<#define epigram|<blockquote><em>"#1"</em></blockquote>>
+<#define attribution|<span>&mdash; #1</span>>
+
