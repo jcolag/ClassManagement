@@ -22,6 +22,21 @@ The script also assumes that you have [antiword](http://www.winfield.demon.nl/) 
 
 Due to _antiword_ not being built for the purpose, the resulting output file is only Markdown in terms of the ordered lists.  Any use of bold, italics, or different typefaces must be handled manually.
 
+textgen.sh
+----------
+
+While _markdown_ simply strips the text out of a single document, _textgen_ takes a target directory and uses or derives a common prefix to convert many files via the _markdown_ script.  To work, it presumes a common format for source files, in the form `CREF Lecture X (Title).doc`, where
+
+ - `CREF` is a course reference number,
+
+ - `X` is a number, and
+
+ - `Title` indicates the lecture contents.
+
+Converting a file with such a name will produce a Markdown-formatted file named like `X_title.md`.
+
+The script actually operates by generating a temporary script, which is executed and deleted behind the scenes.
+
 note.sh
 -------
 
