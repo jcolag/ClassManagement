@@ -1,61 +1,60 @@
 #!/bin/sh
 classes=grading/classes.txt
-students=grading/students.txt
 grades=grading/grades.txt
 
-course=`echo $1 | tr 'A-Z' 'a-z'`
-term=`echo $2 | tr -d -c '[0-9]'`
+course=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+term=$(echo "$2" | tr -d -c '0-9')
 delim=$3
 
-if [ .$delim. = .. ]
+if [ ".$delim." = ".." ]
 then
   delim="\t"
 fi
 
-if [ .$term. = .. ]
+if [ ".$term." = ".." ]
 then
-  yy=`date +%y`
-  mm=`date +%m`
+  yy=$(date +%y)
+  mm=$(date +%m)
   t=0
-  if [ $mm -eq 1 ]
+  if [ "$mm" -eq 1 ]
   then
     t=1
-  elif [ $mm -gt 1 -a $mm -lt 6 ]
+  elif [ "$mm" -gt 1 -a "$mm" -lt 6 ]
   then
     t=2
-  elif [ $mm -lt 9 ]
+  elif [ "$mm" -lt 9 ]
   then
     t=3
-  elif [ $mm -lt 13 ]
+  elif [ "$mm" -lt 13 ]
   then
     t=4
   fi
   term=$yy$t
 fi
 
-if [ .$course. = .. ]
+if [ ".$course." = ".." ]
 then
-  nlines=`grep $term $classes | wc -l`
-  if [ $nlines -ne 1 ]
+  nlines=$(grep -c "$term" "$classes")
+  if [ "$nlines" -ne 1 ]
   then
-    grep $term $classes | cut -f1,3 -d','
+    grep "$term" "$classes" | cut -f1,3 -d','
     exit
   fi
 fi
 
-course=`grep $term $classes | cut -f3 -d','`
-maxname=`grep $course $grades | cut -f1 -d',' | tr -d ' ' | tr 'a-zA-Z' '-' | sort -r | head -1 | wc -c`
+course=$(grep "$term" "$classes" | cut -f3 -d',')
+maxname=$(grep "$course" "$grades" | cut -f1 -d',' | tr -d ' ' | tr 'a-zA-Z' '-' | sort -r | head -1 | wc -c)
 
-classline=`grep $term $classes | grep -i $course | sort -u`
-cref=`echo $classline | cut -f3 -d','`
-ghw=`echo $classline | cut -f4 -d','`
-gx1=`echo $classline | cut -f5 -d','`
-gx2=`echo $classline | cut -f6 -d','`
-nx1=`echo $classline | cut -f7 -d','`
-nx2=`echo $classline | cut -f8 -d','`
+classline=$(grep "$term" "$classes" | grep -i "$course" | sort -u)
+cref=$(echo "$classline" | cut -f3 -d',')
+ghw=$(echo "$classline" | cut -f4 -d',')
+gx1=$(echo "$classline" | cut -f5 -d',')
+gx2=$(echo "$classline" | cut -f6 -d',')
+nx1=$(echo "$classline" | cut -f7 -d',')
+nx2=$(echo "$classline" | cut -f8 -d',')
 vars="-vnamewid=$maxname -vpcHw=$ghw -vpcX1=$gx1 -vpcX2=$gx2 -vnx1=$nx1 -vnx2=$nx2 -vodelim=$delim -vcref=$cref"
 
-grep $cref $grades | awk $vars 'BEGIN {
+grep "$cref" "$grades" | awk $vars 'BEGIN {
  FS = ","
  OFS = "\t"
  if (odelim != "\t" && odelim != "")
