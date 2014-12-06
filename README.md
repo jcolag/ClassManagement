@@ -5,6 +5,8 @@ After teaching for years, I got tired of updating my lecture notes when changing
 
 That has changed, so this is my attempt to future-proof the notes.  Various shell scripts grab the text out of the notes, convert them to [Markdown](http://daringfireball.net/projects/markdown/) for permanent storage (and suitable for version control), and process them into PDF packages with everything needed for the night.
 
+Likewise, rather than spreadsheets for grades in each class and manual extraction of information to notify students of their end-of-semester grades, the grading system has been stripped down to centralized CSV files with a script to process it.
+
 Right now, it's a hodge-podge of small scripts tuned specifically for my existing setup, but hopefully will be generalized and modernized quickly.
 
 markdown.sh
