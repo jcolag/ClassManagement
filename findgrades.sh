@@ -117,12 +117,17 @@ grep "$cref" "$grades" | awk $vars 'BEGIN {
 
  # Print a header line and separator
  # Should use the passed-in delimiter
- printf "      HW\t Mid\t Fin\t Esc\t Avg\tL\t( A / B / C )\n"
- for (i=0; i<namewid; i++)
+ if (OFS == "\t")
+    printf "      "
+ printf "HW%s Mid%s Fin%s Esc%s Avg%sL%s( A / B / C )\n", OFS, OFS, OFS, OFS, OFS, OFS
+ if (OFS == "\t")
    {
-    printf "-"
+    for (i=0; i<namewid; i++)
+      {
+       printf "-"
+      }
+    printf "     -----\t-----\t-----\t----\t------\t--\t-------------\n"
    }
- printf "     -----\t-----\t-----\t----\t------\t--\t-------------\n"
 
  # If either exam has no parts listed, assume each is one piece
  if (nx1 == 0 || nx1 == "")
@@ -211,12 +216,18 @@ grep "$cref" "$grades" | awk $vars 'BEGIN {
 
  # Dump the information for the student
  printf fmt, trim($1)
- printf "     %5.2f\t%5.2f\t%5.2f", avgHw, avgX1, avgX2
- printf "\t%4.1f\t%6.2f\t%s", esc, total, letter
+ if (OFS == "\t")
+    printf "     "
+ printf "%5.2f%s", avgHw, OFS
+ printf "%5.2f%s", avgX1, OFS
+ printf "%5.2f%s", avgX2, OFS
+ printf "%4.1f%s", esc, OFS
+ printf "%6.2f%s", total, OFS
+ printf "%s", letter, OFS
 
  # Only print requirements if the student has not already surpassed it
  if (total < grA) {
-  printf "\t(%3.0f", forA
+  printf "%s(%3.0f", OFS, forA
   if (total < grB) {
     printf "/%3.0f", forB
     if (total < grC) {
