@@ -83,7 +83,7 @@ findgrades.sh
 
 The _findgrades_ script is a stripped-down, single-purpose database for processing class grades.  The required data is spread across three files:
 
- - _`classes.txt`_ identifies each class along with the layout of grades for the class.  Its format is `CREF,TERM,SECTION,Homework,Midterm,Final,MidtermComponents,FinalComponents` (example:  `cs6033,092,2031LI,20,40,40,1,3`), as follows.
+ - _`classes.txt`_ identifies each class along with the layout of grades for the class.  Its format is `CREF,TERM,SECTION,Homework,Midterm,Final,MidtermComponents,FinalComponents` (example:  `cs6033,092,12345,20,40,40,1,3`), as follows.
 
    - The _course reference number_ (CREF) identifies the course, something like _cs101_, but can literally be anything.
 
@@ -116,6 +116,16 @@ The _findgrades_ script is a stripped-down, single-purpose database for processi
    - __Note__ that it is not used by the _findgrades_ script, but rather is a simple format to connect the students with grades.
 
    - __Also note__ that my school banned communication with students regarding grades _except_ in person or where contact information was gathered on the student's first attending class.  This is why _`getpdf.sh`_ adds an attendance sheet to the first night's bundle, even though I never check attendance.
+
+ - _`enroll.txt`_ pairs students with classes.  It generally looks something like `Name,ID,CREF` (example: `Kent,657001938,12345`) as follows, though each item has been seen before.
+
+   - _Name_ is the student's family name, as it appears in `students.txt` and `grades.txt`.
+
+   - _ID_ is the student ID number, like in `students.txt`.
+
+   - _CREF_ is the course reference number as in `classes.txt`.
+
+   - __Note__ that I did not originally think of this capability (I initially processed e-mails separately), and so created a draft copy by sorting the student and grade files (squeezing out extra space) and running `join -t ',' -1 1 -2 1 students-sorted.txt grades-sorted.txt | cut -d',' -f3,6,1 > enroll.txt`.
 
  - _`grades.txt`_, lastly, contains each student's grades for each course taken.  The format here is more free-form, because different courses have different assignments.  However, generally, they look something like `Name,Section,Extra,Homework+,Midterm+,Final+` (example: `Kent,12345,14,10,10,10,10,94,97`) as follows.
 
