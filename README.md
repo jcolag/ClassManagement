@@ -162,3 +162,39 @@ A typical session might look something like the following.
 
 If no arguments are given, the script will guess at the current semester (as I write this, it's December of 2014 or `144`).  If there is only one class available for that semester, it will process grades for that class.  If there are multiple possibilities, it will list them, instead.
 
+gradembox.sh
+------------
+
+_gradembox_ is technically new development.  For many years, especially prior to modern student record systems that could be accessed at any time, I sent out e-mail with each student's grade so that they wouldn't need to wait for the paper grade report to be mailed.  I had a script that pulled the information off of a spreadsheet to generate simple messages to be sent, but never really maintained it.
+
+This script re-creates that in a handier package.
+
+Invoke _gradembox_ like...
+
+    $ sh gradembox.sh cs9801 142 you@school.edu "Your Name"
+
+If fewer than two parameters are provided, the script exits with a usage message.  If the e-mail address or name isn't provided, the script tries to guess it.  Obviously, the guesses are likely to be wrong, except maybe on school-maintained systems that are so infrequently available, today, so be warned.
+
+The output is a series of e-mails outlining each student's grade for the final exam and course.
+
+Currently, it looks something like...
+
+    $ sh gradembox.sh cs9801 142 jimmy@crime.edu "James Moriarty"
+    From - Mon Dec  8 11:16:30 EST 2014
+    Subject: CS6083 Final Grades
+    From: James Moriarty <jimmy@crime.edu>
+    To: Sherlock Holmes <sh221b@baker.onion>
+    Date: Mon, 08 Dec 2014 11:16:30 -0500
+    
+    Hi, Sherlock--
+    
+    This is to notify you of your grade.  You earned a 36.40 on
+    the final exam.  With homework and extra credit, that brings your
+    overall average to an 81.93, which is a B-.
+    
+                                  --James
+
+And so on.  This is essentially in _mbox_ format, which should be usable by most e-mail clients, if you redirect it into a file.
+
+If you only use webmail, though, good luck...
+
