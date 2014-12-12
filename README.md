@@ -9,6 +9,31 @@ Likewise, rather than spreadsheets for grades in each class and manual extractio
 
 Right now, it's a hodge-podge of small scripts tuned specifically for my existing setup, but hopefully will be generalized and modernized quickly.
 
+Workflow
+--------
+
+There are quite a few scripts floating around, here, documented below.  Some of them are used infrequently, some intended mostly as support for a broader process.  So, to summarize the use:
+
+ - _`textgen.sh`_ converts a folder of Microsoft Word documents with an appropriate naming convention into Markdown documents with minimal formatting.  The script will generally only need to be run once per course; the Markdown format has fewer requirements for editing and maintaining, after all.  They do, however, need to be reviewed for any formatting that needs restoration.  The script makes use of _`markdown.sh`_, to easily experiment with and adjust the input and output types without needing to worry about the full process.
+
+ - _`getpdf.sh`_ takes the Markdown notes required for a particular lecture, converting and bundling them into a single PDF file.  If the `<#note` ... `>` GPP macro is used, the script will generate the full lecture notes and a lecture outline for distribution.  It makes use of _`note.sh`_ for the conversion(s), which handles an individual document.
+
+ - _`findgrades.sh`_ calculates the grades for a class in a convenient table or delimited output.  Primarily designed for use at the end of the semester, it also calculates the grade required (at the current point of time) on the final exam for an A, B, and C in the class, if no other changes are made.
+
+ - _`gradembox.sh`_ generates outgoing mail for each student with their final grade for the course.  Obviously, only meant to run at the end of the semester.
+
+In addition to this, the following files need to be maintained.
+
+ - _`grading/classes.txt`_ contains information on each course section, which should be added at the beginning of the semester.
+
+ - _`grading/students.txt`_ contains information on each student, also updated at the start of every semester, both for new students and any changes to contact information.
+
+ - _`grading/enroll.txt`_ indicates which students are enrolled in which sections, also best updated at the start of the semester.
+
+ - _`grading/grades.txt`_ contains the each student's grades for each course, best updated throughout the semester as grades come in.
+
+The files, of course, aren't very different from maintaining any grade record.
+
 markdown.sh
 -----------
 
