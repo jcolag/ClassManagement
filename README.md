@@ -34,8 +34,8 @@ In addition to this, the following files need to be maintained.
 
 The files, of course, aren't very different from maintaining any grade record.
 
-markdown.sh
------------
+`markdown.sh`
+-------------
 
 This script gets the ball rolling.  It takes a Microsoft Word document as an input, converts it to plain text, and indents the ordered lists to show up properly.
 
@@ -49,8 +49,8 @@ The script also assumes that you have [antiword](http://www.winfield.demon.nl/) 
 
 Due to _antiword_ not being built for the purpose, the resulting output file is only Markdown in terms of the ordered lists.  Any use of bold, italics, or different typefaces must be handled manually.
 
-textgen.sh
-----------
+`textgen.sh`
+------------
 
 While _markdown_ simply strips the text out of a single document, _textgen_ takes a target directory and uses or derives a common prefix to convert many files via the _markdown_ script.  To work, it presumes a common format for source files, in the form `CREF Lecture X (Title).doc`, where
 
@@ -64,8 +64,8 @@ Converting a file with such a name will produce a Markdown-formatted file named 
 
 The script actually operates by generating a temporary script, which is executed and deleted behind the scenes.
 
-note.sh
--------
+`note.sh`
+---------
 
 The _note_ script takes a set of lecture notes or supplemental material in Markdown format (with GPP preprocessor directives) as input and outputs a converted file in the specified format.  If the input material doubles as notes and a handout, the script generates both.
 
@@ -83,8 +83,8 @@ For example, a typical run might look like:
 
 The script assumes that you have [GPP](http://en.nothingisreal.com/wiki/GPP) the Generic Preprocessor and [Pandoc](http://johnmacfarlane.net/pandoc/) installed.  Pandoc's template files are also assumed to be in a sister folder to the Markdown documents.
 
-getpdf.sh
----------
+`getpdf.sh`
+-----------
 
 The _getpdf_ script leverages _`node.sh`_ to generate and package everything needed for a lecture into one PDF package.  Looking for the (zero-padded, two-digit) lecture number, it creates each component, plus a blank attendance sheet for the first night.
 
@@ -103,8 +103,8 @@ The script assumes that you have [PDFtk](https://www.pdflabs.com/tools/pdftk-the
 
 Please note that, in calling `pdftk`, the script intentionally avoids quoting `$pdflist` against the judgment of any semantic checker (such as `shellcheck`).  In this case, word splitting is a requirement, because the variable holds multiple file names.  As a result, this presumably means that the PDF files to assemble may not have spaces in them.  My source files have no spaces, so this is no danger.
 
-findgrades.sh
--------------
+`findgrades.sh`
+---------------
 
 The _findgrades_ script is a stripped-down, single-purpose database for processing class grades.  The required data is spread across three files:
 
@@ -187,8 +187,8 @@ A typical session might look something like the following.
 
 If no arguments are given, the script will guess at the current semester (as I write this, it's December of 2014 or `144`).  If there is only one class available for that semester, it will process grades for that class.  If there are multiple possibilities, it will list them, instead.
 
-gradembox.sh
-------------
+`gradembox.sh`
+--------------
 
 _gradembox_ is technically new development.  For many years, especially prior to modern student record systems that could be accessed at any time, I sent out e-mail with each student's grade so that they wouldn't need to wait for the paper grade report to be mailed.  I had a script that pulled the information off of a spreadsheet to generate simple messages to be sent, but never really maintained it.
 
