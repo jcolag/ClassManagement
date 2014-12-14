@@ -34,6 +34,35 @@ In addition to this, the following files need to be maintained.
 
 The files, of course, aren't very different from maintaining any grade record.
 
+Macros
+------
+
+Because Markdown is not _exactly_ designed for desktop publishing in the conventional sense, we extend it here with a preprocessor to insert additional markup codes where necessary.
+
+The scripts assume that the macros are in "HTML format," embedded into the text as `<#macro arguments-or-text>`.  What are probably the most useful macros include...
+
+ - _`file`_, _`literal`_, and _`code`_ all currently translate to preformatted, monospaced text, Markdown backquotes.
+
+ - _`book`_ formats a book title, currently bold-facing the name.
+
+ - _`epigram`_ indents and italicizes a quote, in addition to surrounding it by quotation marks.  The similar _`epigramnq`_ doesn't close the quotation marks, for the rare cases where that's useful.  _`attribution`_ deeply indents an author attribution for the epigram, prefacing it with an em-dash.
+
+ - _`qa`_ slightly indents and italicizes a paragraph, intended as the answer to an exam question, for sample exams.
+
+ - _`note`_ metaphorically splits a document in two, creating full-text notes (for a lecturer, say) and an outline (to be handed out).  In the full-text version, the macro does nothing, just passing the contents through.  For the outline, the macro removes the contents entirely.
+
+ - _`space`_ fills space between two elements to push the surrounding objects to the margins; if the output medium doesn't support it, the macro simply inserts a non-breaking space.  _`newline`_ inserts a line in output formats where it makes sense.  _`page`_ inserts a page break when the output format supports such an idea.
+
+ - _`usejoins`_ prepares the document to use database join symbols later in the text for output formats that require it.
+
+In addition to those, assorted symbols have been added as I have needed them.  Most of the Greek letters (capital and lowercase, named like `<#alpha>` and `<#Alpha>`), Latin vowels with diareses (`<#`__`a`__`uml>` et al), various mathematical symbols (`times`, `plusminus`, `divide`, `element`, `notelement`, `abs`, `sqrt`, `subset`, `supset`, `isect`, `union`, `setdiff`, `negate`, `cross`, `power`, `empty`), and database join symbols (`join`{`l`,`r`,`f`}).
+
+To make use of the macros, the Markdown file must include the macro package, with some variation of:
+
+    <#include "gpp/macros.gpp">
+
+near the top of the notes.
+
 `markdown.sh`
 -------------
 
