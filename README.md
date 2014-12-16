@@ -252,3 +252,31 @@ And so on.  This is essentially in _mbox_ format, which should be usable by most
 
 If you only use webmail, though, good luck...
 
+Example Class
+-------------
+
+To test out the scripts and to give a sense of the expected format, there is a self-referential "first lecture" in the `example` directory.
+
+The lecture uses the format I typically use for lecture notes and at least superficially describes each major piece.  There is also a fake syllabus (the month names are Anglicized versions of the French Revolutionary calendar) and a trivial "sample program" in a hypothetical programming language.  The latter is there just to illustrate supplemental content, with no relevance to the example.
+
+If the previous content didn't sink in, here's how to generate the "first night packet."
+
+    cd example
+    sh ../getpdf.sh 01 xx101
+
+The script output will be...
+
+    DONE!
+    DONE with outline!
+    DONE!
+
+This will create `XX101_L01.pdf`, which includes...
+
+ - Full-text lecture notes,
+ - Attendance sheet,
+ - Sample syllabus,
+ - Lecture outline, and
+ - Sample program
+
+The first two parts are intended to be kept, and the remainder copied and collated to hand out to the students.
+
