@@ -39,7 +39,7 @@ when possible, of course.>
 first, so it's generally most convenient to use the same number throughout
 the notes, in case the item ordering needs to change.>
 0. Lectures vs. Outlines:  <#note Because of the `#note` macro used in the
-various items, the <#file markdown.sh> and <#file getpdf.sh> scripts will
+various items, the `markdown.sh` and `getpdf.sh` scripts will
 convert this file twice.  One version will be a copy with the complete
 text as would be obvious.  The other version will just be the skeletal
 outline without the content embedded in `#note` following the headers.>
@@ -51,17 +51,17 @@ up in the outline, and make sense toward the end of the lecture.>
     a) Preview:  <#note The opposite of the Introduction, or maybe just
 the introduction to the next lecture, for students who want to read
 ahead.>
-0. Syllabus:  <#note In <#file 01a_syllabus.md>, you will (unsurprisingly)
+0. Syllabus:  <#note In `01a_syllabus.md`, you will (unsurprisingly)
 find a generic syllabus, which generally contains more formatting than a
 typical lecture.>
-0. Assembly:  <#note When generating a packet with <#file getpdf.sh>, the
+0. Assembly:  <#note When generating a packet with `getpdf.sh`, the
 result is organized as follows:>
     a) Notes:  <#note For each file with a `#note` macro (like this one),
 the full-text version is filed first, under the assumption that it will
 not be a part of the final handout.>
     a) Attendance Sheet:  <#note For the first lecture (those starting
 with `01`, like this example), the full-text notes are followed by the
-simple, stock attendance sheet found at <#file ../common/attendance.pdf>.
+simple, stock attendance sheet found at `../common/attendance.pdf`.
 It is nothing more than a grid _probably_ created with some ancient
 version of Microsoft Excel.>
     a) Handout:  <#note Every file associated with the lecture (other than
@@ -69,7 +69,7 @@ the full-text notes) are then added in name order.  For this example, that
 is the example syllabus (`01a`), the outline form of these notes (`01b`),
 and a sample program in an imaginary programming language (`01c`).>
 0. Homework #1:  Generate the lecture notes and handout for this fake
-lecture in PDF format using <#file note.sh>.  Generate a full night's
-package, including the fake syllabus using <#file getpdf.sh>.
+lecture in PDF format using `note.sh`.  Generate a full night's
+package, including the fake syllabus using `getpdf.sh`.
 0. Coming Attractions:  That would be your job.  Go!  Be free!
 
